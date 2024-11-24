@@ -12,7 +12,7 @@ class BukuController extends Controller
     // Show buku untuk admin
     public function index()
     {
-        $bukus = Buku::with('categories')->get();
+        $bukus = Buku::with('categories')->orderBy('id')->get();
         $kategoris = Kategori::all();
         return view('librarian.buku', compact('bukus', 'kategoris'));
     }
@@ -20,7 +20,7 @@ class BukuController extends Controller
     // Show buku untuk user
     public function indexmember()
     {
-        $bukus = Buku::with('categories')->get();
+        $bukus = Buku::with('categories')->orderBy('id')->get();
         $kategoris = Kategori::all();
         $peminjamans = peminjaman::all();
         return view('members.perpustakaan', compact('bukus', 'kategoris', 'peminjamans'));
@@ -32,7 +32,7 @@ class BukuController extends Controller
         $kategoris = Kategori::all();
         $time = now();
         $peminjamans = Peminjaman::where('user_id', Auth::user()->id)->where('status', 'dipinjam')->get();
-        $bukus = Buku::whereIn('id', $peminjamans->pluck('buku_id'))->with('categories')->get();
+        $bukus = Buku::whereIn('id', $peminjamans->pluck('buku_id'))->with('categories')->orderBy('id')->get();
         return view('members.buku_pinjam', compact('bukus', 'kategoris', 'peminjamans', 'time'));
     }
     // Add Buku

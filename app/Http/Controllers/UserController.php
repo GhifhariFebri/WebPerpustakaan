@@ -12,7 +12,7 @@ class UserController extends Controller
     // Show all user
     public function index()
     {
-        $users = User::all();
+        $users = User::orderBy('id')->get();
         return view('librarian.user', compact('users'));
     }
 

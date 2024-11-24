@@ -49,7 +49,7 @@ class PeminjamanController extends Controller
     // Admin Page Peminjaman 
     public function index()
     {
-        $peminjamans = peminjaman::all();
+        $peminjamans = peminjaman::orderBy('id')->get();
         return view('librarian.peminjaman', compact('peminjamans'));
     }
     

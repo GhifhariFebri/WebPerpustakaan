@@ -10,7 +10,7 @@ class KategoriController extends Controller
     // Show Kategori
     public function index()
     {
-        $kategoris = Kategori::all();
+        $kategoris = Kategori::orderBy('id')->get();
         return view('librarian.kategori', compact('kategoris'));
     }
 
